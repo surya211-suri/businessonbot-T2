@@ -1,0 +1,57 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - state_by_pincode
+  - city
+  - district
+  - get_pincode
+
+slots:
+  pincode:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: pincode
+
+entities:
+  - pincode
+
+
+responses:
+  utter_greet:
+  - text: "Hey! What yo are looking for? \n 1. state \n 2. City \n 3. District"
+
+  utter_ask_pincode:
+  - text: "Enter your pincode: "
+
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+actions:
+  - action_get_state
+  - action_get_city
+  - action_get_district
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

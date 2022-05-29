@@ -1,0 +1,91 @@
+version: "3.1"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+
+- story: sad path 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+
+- story: sad path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: get_pincode
+  - action: utter_goodbye
+
+- story: state rule
+  steps:
+  - intent: state_by_pincode
+  - action: utter_ask_pincode
+  - intent: get_pincode
+  - action: action_get_state
+
+- story: city rule
+  steps:
+  - intent: city_by_pincode
+  - action: utter_ask_pincode
+  - intent: get_pincode
+  - action: action_get_city
+
+
+- story: district rule
+  steps:
+  - intent: district_by_pincode
+  - action: utter_ask_pincode
+  - intent: get_pincode
+  - action: action_get_district
+
+- story: city_by_pincode
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: city_by_pincode
+  - action: utter_ask_pincode
+  - intent: get_pincode
+    entities:
+    - pincode: '608001'
+  - slot_was_set:
+    - pincode: '608001'
+  - action: action_get_city
+
+- story: state by pincode
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: state_by_pincode
+  - action: utter_ask_pincode
+  - intent: get_pincode
+    entities:
+    - pincode: '608001'
+  - slot_was_set:
+    - pincode: '608001'
+  - action: action_get_state
+
+- story: district by pincode
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: district_by_pincode
+  - action: utter_ask_pincode
+  - intent: get_pincode
+    entities:
+    - pincode: '608001'
+  - slot_was_set:
+    - pincode: '608001'
+  - action: action_get_district
